@@ -1,13 +1,6 @@
-import '../css/common.css'
+import '../css/common.css';
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
-
-const refs = {
-    input: document.querySelector('#datetime-picker'),
-    startBtn: document.querySelector('button[data-start]'),
-    timeEl: document.querySelector('.timer'),
-}
-
 
 const options = {
     enableTime: true,
@@ -18,3 +11,15 @@ const options = {
         console.log(selectedDates[0]);
     },
 };
+
+flatpickr("#datetime-picker", options);
+
+const refs = {
+    input: document.querySelector('input[type="text"]'), //  '#datetime-picker'
+    startBtn: document.querySelector('button[data-start]'),
+    timeEl: document.querySelector('.timer'),
+}
+
+
+
+
