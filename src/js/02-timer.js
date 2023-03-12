@@ -12,6 +12,8 @@ const options = {
     },
 };
 
+
+
 flatpickr("#datetime-picker", options);
 
 const refs = {
