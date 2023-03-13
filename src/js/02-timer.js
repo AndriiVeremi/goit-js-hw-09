@@ -26,19 +26,17 @@ const options = {
 
 flatpickr("input#datetime-picker", options);
 
-Report.info(
-  'Хелов май френд!',
-  'Будь добрий тицьни',
-  'Ок!'
-);
+Report.info('Хелов май френд!', 'Будь добрий тицьни на Ok!', 'Ок!');
 
 function onSetData(selectedDates) {
+
     selectedDate = selectedDates[0].getTime();
     currentDate = new Date().getTime();
 
     if (selectedDate < currentDate) {
         refs.startBtn.disabled = true;
-        Report.failure('🥺 Уууу...', 'Братуха, щось не так!');
+        Report.failure('🥺 Уууу...', 'Братуха, щось не так! Ти, попробуй ще раз а я нікому не скажу');
+       
     } else {
         refs.startBtn.disabled = false; 
         Report.success('Все ок, братанчік!')
@@ -80,3 +78,23 @@ const timer = {
 refs.startBtn.addEventListener('click', () => {
     timer.start();
 })
+
+
+function convertMs(ms) {
+    // Number of milliseconds per unit of time
+    const second = 1000;
+    const minute = second * 60;
+    const hour = minute * 60;
+    const day = hour * 24;
+
+    // Remaining days
+    const days = Math.floor(ms / day);
+    // Remaining hours
+    const hours = Math.floor((ms % day) / hour);
+    // Remaining minutes
+    const minutes = Math.floor(((ms % day) % hour) / minute);
+    // Remaining seconds
+    const seconds = Math.floor((((ms % day) % hour) % minute) / second);
+
+    return { days, hours, minutes, seconds };
+}
