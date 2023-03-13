@@ -12,14 +12,12 @@ const options = {
     },
 };
 
-
-
 flatpickr("#datetime-picker", options);
 
 const refs = {
     input: document.querySelector('input[type="text"]'), //  '#datetime-picker'
     startBtn: document.querySelector('button[data-start]'),
-    timeEl: document.querySelector('.timer'),
+    timerEl: document.querySelector('.timer'),
 }
 
 
