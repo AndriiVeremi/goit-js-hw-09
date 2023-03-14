@@ -4,14 +4,19 @@ import "flatpickr/dist/flatpickr.min.css";
 import { Report } from 'notiflix/build/notiflix-report-aio';
 
 const refs = {
-    inputData: document.querySelector('input#datetime-picker'), // input[type="text"]
+    inputData: document.querySelector('input#datetime-picker'), 
     startBtn: document.querySelector('button[data-start]'),
-    timerEl: document.querySelector('.timer'),
+    days: document.querySelector('[data-days]'),
+    hours: document.querySelector('[data-hours]'),
+    minutes: document.querySelector('[data-minutes]'),
+    seconds: document.querySelector('[data-seconds]'),
 }
 
-let selectedDate = null;
-let currentDate = null;
 refs.startBtn.disabled = true;
+
+// let intervalId = null;
+// let selectedDate = null;
+// let currentDate = null;
 
 const options = {
     enableTime: true,
@@ -19,66 +24,35 @@ const options = {
     defaultDate: new Date(),
     minuteIncrement: 1,
     onClose(selectedDates) {
-        console.log(selectedDates[0]);
+        // console.log(selectedDates[0]);
         onSetData(selectedDates);
     },
 };
 
 flatpickr("input#datetime-picker", options);
 
+refs.startBtn.addEventListener('click', promoTimers)
+
 Report.info('Хелов май френд!', 'Будь добрий тицьни на Ok!', 'Ок!');
 
 function onSetData(selectedDates) {
-
-    selectedDate = selectedDates[0].getTime();
+    selectedDate = selectedDates[0].getTime();;
     currentDate = new Date().getTime();
-
+    
     if (selectedDate < currentDate) {
         refs.startBtn.disabled = true;
-        Report.failure('🥺 Уууу...', 'Братуха, щось не так! Ти, попробуй ще раз а я нікому не скажу');
-       
+        Report.failure('🥺 Уууу...', 'щось не так! Спробуй ще раз');
     } else {
-        refs.startBtn.disabled = false; 
-        Report.success('Все ок, братанчік!')
-    } 
-}
+        refs.startBtn.disabled = false;
+    }
+};
 
-
-
-
-// function onStartClick(event) {
-    
-
-
-const timer = {
-
-    // intervalId: null,
-    // isActive: false,
-
-    start() {
-        console.log('message')
-        // if (this.isActive) {
-        //     return;
-        // }
-        // this.isActive = true;
-        this.intervalId = setInterval(() => {
-            // getColorBody();
-        }, 1000, 1000)
-    },
-
-    stop() {
-
-        if (this.isActive) {
-            clearInterval(this.intervalId);
-            this.isActive = false;
-        }
-    },
-}
-
-refs.startBtn.addEventListener('click', () => {
-    timer.start();
-})
-
+function timerContent({ days, hours, minutes, seconds }) {
+    refs.days.textContent = `${days}`;
+    refs.hours.textContent = `${hours}`;
+    refs.minutes.textContent = `${minutes}`;
+    refs.seconds.textContent = `${seconds}`;
+};
 
 function convertMs(ms) {
     // Number of milliseconds per unit of time
@@ -88,13 +62,38 @@ function convertMs(ms) {
     const day = hour * 24;
 
     // Remaining days
-    const days = Math.floor(ms / day);
+    const days = addLeadingZero(Math.floor(ms / day));
     // Remaining hours
-    const hours = Math.floor((ms % day) / hour);
+    const hours = addLeadingZero(Math.floor((ms % day) / hour));
     // Remaining minutes
-    const minutes = Math.floor(((ms % day) % hour) / minute);
+    const minutes = addLeadingZero(Math.floor(((ms % day) % hour) / minute));
     // Remaining seconds
-    const seconds = Math.floor((((ms % day) % hour) % minute) / second);
-
+    const seconds = addLeadingZero(Math.floor((((ms % day) % hour) % minute) / second));
+    
     return { days, hours, minutes, seconds };
-}
+};
+
+function addLeadingZero(value) {
+    return String(value).padStart(2, '0');
+};
+
+function promoTimers() {
+  intervalId = setInterval(() => {
+      currentDate = new Date().getTime();     
+      const promoTime = selectedDate - currentDate;
+      timerContent(convertMs(promoTime));
+      refs.startBtn.disabled = true;
+      
+      if (selectedDate - currentDate < 1000) {
+          clearInterval(intervalId)
+          Report.success('Вітаю!');
+          refs.startBtn.disabled = false;
+      }    
+  }, 1000);
+};
+
+
+
+
+
+
