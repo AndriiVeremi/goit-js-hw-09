@@ -6,28 +6,22 @@ const refs = {
     bodyEl: document.body,
 }
 
+refs.startBtn.disabled = false;
+
 const changerBg = {
 
     intervalId: null,
-    isActive: false,
 
     start() {
-
-        if (this.isActive) {
-            return;
-        }
-        this.isActive = true;
+        refs.startBtn.disabled = true;
         this.intervalId = setInterval(() => {
             getColorBody();
         }, 1000, 1000)
     },
 
     stop() {
-
-        if (this.isActive) {
-            clearInterval(this.intervalId);
-            this.isActive = false;
-        }
+        refs.startBtn.disabled = false;
+        clearInterval(this.intervalId);
     },
 }
 
@@ -39,67 +33,13 @@ refs.stopBtn.addEventListener('click', () => {
     changerBg.stop();
 });
 
+function getRandomHexColor() {
+    return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+};
+
 function getColorBody() {
     let randomHexColor = getRandomHexColor();
     refs.bodyEl.style.backgroundColor = randomHexColor;
 };
 
-function getRandomHexColor() {
-    return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-};
 
-
-// const changer = {
-
-//     intervalId: null,
-//     isActive: false,
-
-//     start() {
-
-//         if (this.isActive) {
-//             return;
-//         }
-//         this.isActive = true;
-
-//         this.intervalId = setInterval(() => {
-//              getColorBody();
-//         }, 1000, 1000)
-//     },
-
-//     // stop() {
-//     //     clearInterval(this.intervalId);
-//     //     this.isActive = false;
-//     // },
-
-//     stop() {
-
-//         if (this.isActive) {
-//             clearInterval(this.intervalId);
-//             this.isActive = false;
-//         }     
-//     },
-
-// }
-
-// refs.startBtn.addEventListener('click', () => {
-//     changer.start();
-// });
-
-// refs.stopBtn.addEventListener('click', () => {
-//     changer.stop();
-// });
-
-// // const getColorBody = () => {
-// //     let randomHexColor = getRandomHexColor()
-// //     refs.bodyEl.style.backgroundColor = randomHexColor;
-// // };
-
-// function getColorBody() {
-//     let randomHexColor = getRandomHexColor()
-//     refs.bodyEl.style.backgroundColor = randomHexColor;
-// };
-
-
-// function getRandomHexColor() {
-//     return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-// };

@@ -18,6 +18,10 @@ refs.startBtn.disabled = true;
 // let selectedDate = null;
 // let currentDate = null;
 
+refs.startBtn.addEventListener('click', promoTimers)
+
+Report.info('Хелов май френд!', 'Будь добрий тицьни Okей!', 'Ок!');
+
 const options = {
     enableTime: true,
     time_24hr: true,
@@ -30,10 +34,6 @@ const options = {
 };
 
 flatpickr("input#datetime-picker", options);
-
-refs.startBtn.addEventListener('click', promoTimers)
-
-Report.info('Хелов май френд!', 'Будь добрий тицьни на Ok!', 'Ок!');
 
 function onSetData(selectedDates) {
     selectedDate = selectedDates[0].getTime();;
