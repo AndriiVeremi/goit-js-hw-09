@@ -36,7 +36,7 @@ const options = {
 flatpickr("input#datetime-picker", options);
 
 function onSetData(selectedDates) {
-    selectedDate = selectedDates[0].getTime();;
+    selectedDate = selectedDates[0].getTime();
     currentDate = new Date().getTime();
     
     if (selectedDate < currentDate) {

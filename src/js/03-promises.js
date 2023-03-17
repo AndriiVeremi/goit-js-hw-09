@@ -31,7 +31,7 @@ function onFormSubmit(event) {
   let amount = Number(refs.amount.value);
   let step = Number(refs.step.value);
   
-  for (let i = 0; i < amount; i += 1) {
+  for (let i = 1; i <= amount; i += 1) {
     let newDelay = firstDelay + step * i;
     createPromise(i, newDelay)
       .then(({ position, delay }) => {
