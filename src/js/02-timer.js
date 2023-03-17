@@ -1,4 +1,3 @@
-import '../css/common.css';
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 import { Report } from 'notiflix/build/notiflix-report-aio';
@@ -12,13 +11,14 @@ const refs = {
     seconds: document.querySelector('[data-seconds]'),
 }
 
+
+
+let intervalId = null;
+let selectedDate = null;
+let currentDate = null;
+
 refs.startBtn.disabled = true;
-
-// let intervalId = null;
-// let selectedDate = null;
-// let currentDate = null;
-
-refs.startBtn.addEventListener('click', promoTimers)
+refs.startBtn.addEventListener('click', promoTimers);
 
 Report.info('Хелов май френд!', 'Будь добрий тицьни Okей!', 'Ок!');
 
