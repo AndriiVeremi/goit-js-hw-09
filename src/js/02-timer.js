@@ -47,6 +47,21 @@ function onSetData(selectedDates) {
     }
 };
 
+function promoTimers() {
+    intervalId = setInterval(() => {
+        currentDate = new Date().getTime();
+        const promoTime = selectedDate - currentDate;
+        timerContent(convertMs(promoTime));
+        refs.startBtn.disabled = true;
+
+        if (selectedDate - currentDate < 1000) {
+            clearInterval(intervalId)
+            Report.success('Вітаю!');
+            refs.startBtn.disabled = false;
+        }
+    }, 1000);
+};
+
 function timerContent({ days, hours, minutes, seconds }) {
     refs.days.textContent = `${days}`;
     refs.hours.textContent = `${hours}`;
@@ -77,20 +92,7 @@ function addLeadingZero(value) {
     return String(value).padStart(2, '0');
 };
 
-function promoTimers() {
-  intervalId = setInterval(() => {
-      currentDate = new Date().getTime();     
-      const promoTime = selectedDate - currentDate;
-      timerContent(convertMs(promoTime));
-      refs.startBtn.disabled = true;
-      
-      if (selectedDate - currentDate < 1000) {
-          clearInterval(intervalId)
-          Report.success('Вітаю!');
-          refs.startBtn.disabled = false;
-      }    
-  }, 1000);
-};
+
 
 
 
