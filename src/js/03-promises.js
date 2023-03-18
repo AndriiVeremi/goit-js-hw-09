@@ -27,19 +27,19 @@ function createPromise(position, delay) {
 function onFormSubmit(event) {
   event.preventDefault();
 
-  let firstDelay = Number(refs.delay.value);
+  let newDelay = Number(refs.delay.value);
   let amount = Number(refs.amount.value);
   let step = Number(refs.step.value);
   
   for (let i = 1; i <= amount; i += 1) {
-    let newDelay = firstDelay + step * i;
     createPromise(i, newDelay)
       .then(({ position, delay }) => {
         Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
       })
       .catch(({ position, delay }) => {
         Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
-      });
+      });   
+    newDelay = newDelay + step;
   };
 };
 
