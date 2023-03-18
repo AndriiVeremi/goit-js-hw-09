@@ -11,8 +11,6 @@ const refs = {
     seconds: document.querySelector('[data-seconds]'),
 }
 
-
-
 let intervalId = null;
 let selectedDate = null;
 let currentDate = null;
