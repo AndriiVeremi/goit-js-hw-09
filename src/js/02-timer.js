@@ -33,10 +33,8 @@ function onSelectingValidDate(selectedDates) {
         btnStart.disabled = true;
         window.alert("Please choose a date in the future");
         return;
-    } else {
-        btnStart.disabled = false;
     }
-    
+    btnStart.disabled = false;
 };
 
 function onStartTimer() {
@@ -141,6 +139,17 @@ function convertMs(ms) {
 
 
 
+// function onSelectingValidDate(selectedDates) {
+//     inputDate = selectedDates.getTime();
+//     if (inputDate < Date.now()) {
+//         btnStart.disabled = true;
+//         window.alert("Please choose a date in the future");
+//         return;
+//     } else {
+//         btnStart.disabled = false; 
+//     }
+    
+// };
 
 
 
