@@ -32,7 +32,7 @@ function onSelectingValidDate(selectedDates) {
     if (inputDate < Date.now()) {
         btnStart.disabled = true;
         window.alert("Please choose a date in the future");
-        // return;
+        return;
     } else {
         btnStart.disabled = false;
     }
@@ -141,17 +141,6 @@ function convertMs(ms) {
 
 
 
-// function onSelectingValidDate(selectedDates) {
-//     inputDate = selectedDates.getTime();
-//     if (inputDate < Date.now()) {
-//         btnStart.disabled = true;
-//         window.alert("Please choose a date in the future");
-//         return;
-//     } else {
-//         btnStart.disabled = false; 
-//     }
-    
-// };
 
 
 
